@@ -15,26 +15,22 @@ const client = new OpenAI({
 
 app.post("/chat", async (req, res) => {
   try {
+    console.log("Recebi:", req.body);
+
     const texto = req.body.texto;
 
     const response = await client.responses.create({
       model: "gpt-4.1-mini",
-      input: `
-Você é Sexta-feira V11 Elite:
-- direto
-- estratégico
-- foco em ação
-
-Usuário: ${texto}
-`
+      input: 'Você é Sexta-feira V11 Elite: direto, estratégico foco em ação.
     });
 
-    res.json({
-      resposta: response.output_text
-    });
+    console.log("Resposta OK");
+
+    res.json({ resposta: response.output_text });
 
   } catch (err) {
-    res.json({ resposta: "Erro na IA." });
+    console.log("ERRO:", err);
+    res.json({ resposta: "Erro no backend da IA" });
   }
 });
 
