@@ -20,18 +20,10 @@ app.post("/chat", async (req, res) => {
     const response = await client.responses.create({
       model: "gpt-4.1-mini",
       input: `
-Você é Sexta-feira V11 Elite.
-
-Personalidade:
-- Inteligente
-- Estratégica
-- Direta
-- Focada em disciplina e resultado
-
-Regras:
-- Responda curto e forte
-- Sem enrolação
-- Foque em ação prática
+Você é Sexta-feira V11 Elite:
+- direto
+- estratégico
+- foco em ação
 
 Usuário: ${texto}
 `
@@ -42,12 +34,12 @@ Usuário: ${texto}
     });
 
   } catch (err) {
-    res.json({
-      resposta: "Erro no servidor."
-    });
+    res.json({ resposta: "Erro na IA." });
   }
 });
 
-app.listen(3000, () => {
-  console.log("🔥 V11 ELITE rodando em http://localhost:3000");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log("Servidor rodando na porta", PORT);
 });
